@@ -50,7 +50,7 @@ function renderQuestions() {
   });
 }
 
-askButton.addEventListener("click", function () {
+function addQuestion() {
   const questionText = questionInput.value.trim();
 
   if (questionText === "") {
@@ -63,6 +63,13 @@ askButton.addEventListener("click", function () {
   renderQuestions();
 
   questionInput.value = "";
-});
+}
 
+askButton.addEventListener("click", addQuestion);
+
+questionInput.addEventListener("keydown", function (event) {
+  if (event.key === "Enter") {
+    addQuestion();
+  }
+});
 renderQuestions();
