@@ -14,6 +14,12 @@ function saveUserQuestions() {
   localStorage.setItem("userQuestions", JSON.stringify(userQuestions));
 }
 
+function deleteQuestion(index) {
+  userQuestions.splice(index, 1);
+  saveUserQuestions();
+  renderQuestions();
+}
+
 function renderQuestions() {
   questionList.innerHTML = "";
 
@@ -23,9 +29,23 @@ function renderQuestions() {
     questionList.appendChild(newQuestion);
   });
 
-  userQuestions.forEach(function (question) {
+  userQuestions.forEach(function (question, index) {
     const newQuestion = document.createElement("li");
-    newQuestion.textContent = question;
+
+    const questionText = document.createElement("span");
+    questionText.textContent = question;
+
+    const deleteButton = document.createElement("button");
+    deleteButton.textContent = "삭제";
+    deleteButton.className = "delete-button";
+
+    deleteButton.addEventListener("click", function () {
+      deleteQuestion(index);
+    });
+
+    newQuestion.appendChild(questionText);
+    newQuestion.appendChild(deleteButton);
+
     questionList.appendChild(newQuestion);
   });
 }
