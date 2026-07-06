@@ -44,7 +44,17 @@
       margin-bottom: 8px;
       font-size: 17px;
     }
-
+    
+input {
+  width: 100%;
+  padding: 14px;
+  margin-top: 24px;
+  margin-bottom: 12px;
+  font-size: 16px;
+  border: 1px solid #d1d5db;
+  border-radius: 10px;
+  box-sizing: border-box;
+}
     button {
       margin-top: 24px;
       padding: 12px 20px;
@@ -69,7 +79,7 @@
     <p>전문약사와 함께하는 맞춤영양제 추천 커뮤니티입니다.</p>
 
     <h2>인기 질문</h2>
-    <ul>
+    <ul id="questionList">
       <li>마그네슘은 자기 전에 먹어도 되나요?</li>
       <li>비타민D와 오메가3를 같이 먹어도 되나요?</li>
       <li>피로할 때 먹기 좋은 영양제는 무엇인가요?</li>
@@ -82,13 +92,30 @@
       <li>이약사 - 답변 81개</li>
     </ol>
 
+    <input id="questionInput" type="text" placeholder="궁금한 영양제 질문을 입력하세요">
     <button id="askButton">질문하기</button>
   </div>
   <script>
   const askButton = document.getElementById("askButton");
+  const questionInput = document.getElementById("questionInput");
+  const questionList = document.getElementById("questionList");
 
   askButton.addEventListener("click", function () {
-    alert("질문 작성 기능은 준비 중입니다!");
+    const questionText = questionInput.value;
+
+    if (questionText.trim() === "") {
+      alert("질문을 입력해주세요!");
+      return;
+    }
+
+    const newQuestion = document.createElement("li");
+    newQuestion.textContent = questionText;
+
+    questionList.appendChild(newQuestion);
+
+    questionInput.value = "";
+  });
+</script>
   });
 </script>
 </body>
