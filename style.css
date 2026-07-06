@@ -81,3 +81,8 @@ input {
 .delete-button:hover {
   background-color: #dc2626;
 }
+#questionCount {
+  font-size: 14px;
+  color: #6b7280;
+  margin-top: 8px;
+}
