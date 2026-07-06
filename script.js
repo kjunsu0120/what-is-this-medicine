@@ -1,6 +1,7 @@
 const askButton = document.getElementById("askButton");
 const questionInput = document.getElementById("questionInput");
 const questionList = document.getElementById("questionList");
+const questionCount = document.getElementById("questionCount");
 
 const defaultQuestions = [
   "마그네슘은 자기 전에 먹어도 되나요?",
@@ -27,6 +28,9 @@ function renderQuestions() {
     const newQuestion = document.createElement("li");
     newQuestion.textContent = question;
     questionList.appendChild(newQuestion);
+    const totalCount = defaultQuestions.length + userQuestions.length;
+
+questionCount.textContent = `전체 질문 ${totalCount}개 · 직접 추가한 질문 ${userQuestions.length}개`;
   });
 
   userQuestions.forEach(function (question, index) {
