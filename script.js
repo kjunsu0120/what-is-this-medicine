@@ -1,19 +1,34 @@
-  const askButton = document.getElementById("askButton");
-  const questionInput = document.getElementById("questionInput");
-  const questionList = document.getElementById("questionList");
+const askButton = document.getElementById("askButton");
+const questionInput = document.getElementById("questionInput");
+const questionList = document.getElementById("questionList");
 
-  askButton.addEventListener("click", function () {
-    const questionText = questionInput.value;
+let questions = JSON.parse(localStorage.getItem("questions")) || [];
 
-    if (questionText.trim() === "") {
-      alert("질문을 입력해주세요!");
-      return;
-    }
+function renderQuestions() {
+  questionList.innerHTML = "";
 
+  questions.forEach(function (question) {
     const newQuestion = document.createElement("li");
-    newQuestion.textContent = questionText;
-
+    newQuestion.textContent = question;
     questionList.appendChild(newQuestion);
-
-    questionInput.value = "";
   });
+}
+
+askButton.addEventListener("click", function () {
+  const questionText = questionInput.value;
+
+  if (questionText.trim() === "") {
+    alert("질문을 입력해주세요!");
+    return;
+  }
+
+  questions.push(questionText);
+
+  localStorage.setItem("questions", JSON.stringify(questions));
+
+  renderQuestions();
+
+  questionInput.value = "";
+});
+
+renderQuestions();
